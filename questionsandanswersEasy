@@ -745,6 +745,165 @@ class Solution:
         return psum
 
 
+Given an integer array nums, handle multiple queries of the following type:
+
+Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
+Implement the NumArray class:
+
+NumArray(int[] nums) Initializes the object with the integer array nums.
+int sumRange(int left, int right) Returns the sum of the elements of nums between indices left and right inclusive (i.e. nums[left] + nums[left + 1] + ... + nums[right]).
+ 
+
+Example 1:
+
+Input
+["NumArray", "sumRange", "sumRange", "sumRange"]
+[[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
+Output
+[null, 1, -1, -3]
+
+Explanation
+NumArray numArray = new NumArray([-2, 0, 3, -5, 2, -1]);
+numArray.sumRange(0, 2); // return (-2) + 0 + 3 = 1
+numArray.sumRange(2, 5); // return 3 + (-5) + 2 + (-1) = -1
+numArray.sumRange(0, 5); // return (-2) + 0 + 3 + (-5) + 2 + (-1) = -3
+ 
+
+Constraints:
+
+1 <= nums.length <= 104
+-105 <= nums[i] <= 105
+0 <= left <= right < nums.length
+At most 104 calls will be made to sumRange.
+
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        self.psum = [nums[0]]
+        for i in range(1,len(nums)):
+            self.psum.append(self.psum[-1] + nums[i])
+        
+
+    def sumRange(self, left: int, right: int) -> int:
+        return self.psum[right] - self.psum[left-1] if left>0 else self.psum[right]
+        
+
+
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# param_1 = obj.sumRange(left,right)
+
+
+Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3,1], k = 3
+Output: true
+Example 2:
+
+Input: nums = [1,0,1,1], k = 1
+Output: true
+Example 3:
+
+Input: nums = [1,2,3,1,2,3], k = 2
+Output: false
+ 
+
+Constraints:
+
+1 <= nums.length <= 105
+-109 <= nums[i] <= 109
+0 <= k <= 105
+
+
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        hmap = {}
+
+        for i,num in enumerate(nums):
+            if num in hmap and abs(i-hmap[num]) <= k:
+                return True
+
+            else:
+                hmap[num] = i 
+
+        return False
+
+
+Given an integer array nums, find three numbers whose product is maximum and return the maximum product.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3]
+Output: 6
+Example 2:
+
+Input: nums = [1,2,3,4]
+Output: 24
+Example 3:
+
+Input: nums = [-1,-2,-3]
+Output: -6
+ 
+
+Constraints:
+
+3 <= nums.length <= 104
+-1000 <= nums[i] <= 1000
+
+
+class Solution:
+    def maximumProduct(self, nums: List[int]) -> int:
+        nums.sort()
+        return max(nums[0]*nums[1]*nums[-1], nums[-3]*nums[-2]*nums[-1])
+
+
+Given the roots of two binary trees root and subRoot, return true if there is a subtree of root with the same structure and node values of subRoot and false otherwise.
+
+A subtree of a binary tree tree is a tree that consists of a node in tree and all of this node's descendants. The tree tree could also be considered as a subtree of itself.
+
+ 
+
+Example 1:
+
+
+Input: root = [3,4,5,1,2], subRoot = [4,1,2]
+Output: true
+Example 2:
+
+
+Input: root = [3,4,5,1,2,null,null,null,null,0], subRoot = [4,1,2]
+Output: false
+ 
+
+Constraints:
+
+The number of nodes in the root tree is in the range [1, 2000].
+The number of nodes in the subRoot tree is in the range [1, 1000].
+-104 <= root.val <= 104
+-104 <= subRoot.val <= 104
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+
+        def builder(node):
+            if not node: return 'N'
+
+            return f"({builder(node.left)},{node.val},{builder(node.right)})"
+
+        return builder(subRoot) in builder(root)
 
 
 
