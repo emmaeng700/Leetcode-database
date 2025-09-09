@@ -5,10 +5,17 @@ A comprehensive collection of LeetCode problems and solutions organized by diffi
 ## 📋 Repository Structure
 
 ```
-├── README.md                    # Project documentation
-├── questionsandanswersEasy      # Easy difficulty problems and solutions
-├── questionsandanswersMediums   # Medium difficulty problems and solutions  
-├── questionsandanswersHards     # Hard difficulty problems and solutions
+├── README.md                           # Project documentation
+├── LICENSE                             # MIT license
+├── CONTRIBUTING.md                     # Contribution guidelines
+├── .gitignore                          # Git ignore rules
+└── problems/                           # Problem collections by difficulty
+    ├── easy/
+    │   └── problems-and-solutions.md   # Easy difficulty problems
+    ├── medium/
+    │   └── problems-and-solutions.md   # Medium difficulty problems
+    └── hard/
+        └── problems-and-solutions.md   # Hard difficulty problems
 ```
 
 ## 🎯 Features
@@ -25,6 +32,11 @@ A comprehensive collection of LeetCode problems and solutions organized by diffi
 - Basic understanding of data structures and algorithms
 
 ### Usage
+Navigate to the appropriate difficulty folder and browse the problems:
+- `problems/easy/` - Fundamental algorithms and data structures
+- `problems/medium/` - Intermediate patterns and optimization techniques  
+- `problems/hard/` - Advanced algorithms and complex problem solving
+
 Each file contains problems and their solutions in the following format:
 - **Problem Statement**: Clear description with examples and constraints
 - **Solution**: Optimized Python implementation with comments
